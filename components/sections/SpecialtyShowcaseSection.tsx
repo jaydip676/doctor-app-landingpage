@@ -52,7 +52,7 @@ export function SpecialtyShowcaseSection() {
         ))}
       </div>
       <div className="max-w-[880px] mx-auto border border-line rounded-[18px] bg-surface shadow-[var(--shadow-card)] overflow-hidden motion-reveal">
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-line bg-[#fafbfa]">
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-line bg-[var(--app-chrome)]">
           <i className="w-2.5 h-2.5 rounded-full bg-line" />
           <i className="w-2.5 h-2.5 rounded-full bg-line" />
           <i className="w-2.5 h-2.5 rounded-full bg-line" />

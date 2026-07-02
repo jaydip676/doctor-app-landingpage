@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ColorModeToggle } from "@/components/ui/ColorModeToggle";
 import { Brand } from "@/components/ui/Typography";
 
 const links = [
@@ -12,6 +13,14 @@ const links = [
   { label: "Resources", href: "#stories" },
   { label: "Pricing", href: "#pricing" },
 ];
+
+function themeChipClass(active: boolean) {
+  return `px-2.5 py-1 rounded-full border transition-colors duration-300 ${
+    active
+      ? "border-teal text-teal-ink bg-teal-tint"
+      : "border-transparent text-ink-soft hover:text-ink"
+  }`;
+}
 
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -45,27 +54,21 @@ export function SiteNav() {
           ))}
         </div>
         <div className="flex items-center gap-2 sm:gap-4 shrink-0">
-          <div className="hidden sm:flex items-center gap-1 text-[11px] font-semibold">
-            <Link
-              href="/"
-              className={`px-2.5 py-1 rounded-full border ${
-                pathname === "/"
-                  ? "border-teal text-teal-ink bg-teal-tint"
-                  : "border-line text-ink-soft hover:text-ink"
-              }`}
-            >
+          <div className="flex items-center gap-1 rounded-full border border-line bg-[var(--theme-toggle-bar-bg)] p-1 text-[10px] sm:text-[11px] font-semibold backdrop-blur-sm">
+            <Link href="/" className={themeChipClass(pathname === "/")}>
               Teal
             </Link>
             <Link
               href="/purple"
-              className={`px-2.5 py-1 rounded-full border ${
-                pathname.startsWith("/purple")
-                  ? "border-teal text-teal-ink bg-teal-tint"
-                  : "border-line text-ink-soft hover:text-ink"
-              }`}
+              className={themeChipClass(pathname.startsWith("/purple"))}
             >
               Indigo
             </Link>
+            <span
+              className="mx-0.5 h-3.5 w-px bg-line shrink-0"
+              aria-hidden
+            />
+            <ColorModeToggle />
           </div>
           <Link
             href="#"
@@ -75,7 +78,7 @@ export function SiteNav() {
           </Link>
           <Link
             href="mailto:hello@lampros.tech"
-            className="text-sm font-semibold px-[18px] py-2.5 rounded-full bg-[var(--btn-primary-bg)] !text-white shadow-[var(--btn-primary-shadow)]"
+            className="text-sm font-semibold px-[18px] py-2.5 rounded-full bg-[var(--btn-primary-bg)] !text-[var(--btn-primary-fg)] shadow-[var(--btn-primary-shadow)]"
           >
             Start free trial
           </Link>

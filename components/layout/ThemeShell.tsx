@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
+import { refreshThemeAppearance } from "@/lib/theme/apply-theme";
 
 export type BrandTheme = "teal" | "purple";
 
@@ -20,6 +21,7 @@ export function ThemeShell({
     } else {
       root.removeAttribute("data-theme");
     }
+    refreshThemeAppearance();
     return () => root.removeAttribute("data-theme");
   }, [theme]);
 

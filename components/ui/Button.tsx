@@ -8,9 +8,9 @@ const base =
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    "btn-primary bg-[var(--btn-primary-bg)] !text-white px-[26px] py-[15px] shadow-[var(--btn-primary-shadow)] hover:-translate-y-0.5 transition-transform duration-[250ms]",
+    "btn-primary bg-[var(--btn-primary-bg)] !text-[var(--btn-primary-fg)] px-[26px] py-[15px] shadow-[var(--btn-primary-shadow)] hover:-translate-y-0.5 transition-transform duration-[250ms]",
   ghost:
-    "text-ink border border-line bg-white/60 px-6 py-[15px] hover:border-ink-faint duration-[250ms]",
+    "text-ink border border-line bg-[var(--btn-ghost-fill)] px-6 py-[15px] hover:border-ink-faint duration-[250ms]",
 };
 
 export function Button({

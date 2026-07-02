@@ -68,7 +68,7 @@ export function VideoTourModal({
               <Link
                 href="#seeit"
                 onClick={onClose}
-                className="inline-flex items-center justify-center font-semibold text-[15px] px-6 py-3 rounded-full bg-[var(--btn-primary-bg)] !text-white shadow-[var(--btn-primary-shadow)]"
+                className="inline-flex items-center justify-center font-semibold text-[15px] px-6 py-3 rounded-full bg-[var(--btn-primary-bg)] !text-[var(--btn-primary-fg)] shadow-[var(--btn-primary-shadow)]"
               >
                 Watch interactive demo
               </Link>
@@ -88,7 +88,7 @@ export function VideoTourTrigger({ className = "" }: { className?: string }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={`inline-flex items-center gap-2.5 font-semibold text-[15px] text-ink border border-line bg-white/60 px-5 py-[15px] rounded-full hover:border-ink-faint transition-colors ${className}`}
+        className={`inline-flex items-center gap-2.5 font-semibold text-[15px] text-ink border border-line bg-[var(--btn-ghost-fill)] px-5 py-[15px] rounded-full hover:border-ink-faint transition-colors ${className}`}
       >
         <span className="flex h-8 w-8 items-center justify-center rounded-full bg-teal text-white shrink-0">
           <svg width="11" height="12" viewBox="0 0 11 12" fill="currentColor" aria-hidden>

@@ -59,30 +59,40 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Split sections: full viewport height (`min-h-svh`), **two-column grid** on viewports **>900px** (`1fr 1fr`, gap 30px) by default. Copy sits in column 1/2 with `max-w-[60ch]` and an empty spacer column for particles. **Hero:** pass `wideContent` on `SplitSection` — copy spans both columns up to `~82ch`, no spacer; particles may overlap behind (`z-[4]` on copy, canvas at `z-[1]`).
 - Wide sections: optional `alt` = white surface + top/bottom `border-line`
 
+### Theming (light / dark + accent)
+
+- **Source of truth:** `lib/theme/tokens.ts` — `resolveThemeVars(colorMode, brand)` merges base + accent (teal | indigo).
+- **Runtime:** `applyTheme()` in `lib/theme/apply-theme.ts` sets `data-color-mode` on `<html>` and applies every token as an inline custom property (light and dark), so toggles stay in sync.
+- **CSS fallbacks:** `app/theme-vars.css` (imported from `globals.css`) — keep aligned with `tokens.ts` when adding variables.
+- **Persistence:** `localStorage` key `lampros-color-mode`; boot script in `app/layout.tsx` applies the saved theme before paint.
+- **Accent route:** `/purple` sets `data-theme="indigo"` via `ThemeShell` / purple layout; call `refreshThemeAppearance()` after brand changes.
+- **UI tokens:** prefer semantic vars (`--theme-toggle-fg`, `--demo-sidebar`, `--announcement-badge-fg`, etc.) instead of hard-coded hex or misusing `text-teal-tint` for text on dark surfaces.
+- **New sites / variants:** add a brand block in `tokens.ts` and optional overrides in `theme-vars.css`; use `var(--token)` in components.
+
 ## Homepage section map (order matters for scroll canvas)
 
 Shell: `AnnouncementBar` (fixed top) → `SiteNav` (`top: var(--announcement-height)`). Maturity copy (announcement, partners, stats, testimonials, badges, integrations, stories, video URL, WhatsApp) lives in **`lib/home-content.ts`**.
 
-| #   | Component                  | Layout       | `id` / notes                 |
-| --- | -------------------------- | ------------ | ---------------------------- |
+| #   | Component                  | Layout       | `id` / notes                               |
+| --- | -------------------------- | ------------ | ------------------------------------------ |
 | 1   | `HeroSection`              | split, left  | `.anchor` — scroll cue, `VideoTourTrigger` |
-| 2   | `TrustedByStrip`           | compact wide | `#trusted` — marquee cities  |
-| 3   | `RealitySection`           | split, right | `.anchor`                    |
-| 4   | `ImagineSection`           | split, left  | `.anchor`                    |
-| 5   | `PlatformSection`          | split, right | `.anchor`                    |
-| 6   | `ProductDemoSection`       | wide alt     | `#seeit` — client, GSAP demo |
-| 7   | `WhyDoctorsSection`        | split, left  | `.anchor`                    |
-| 8   | `SpecialtyShowcaseSection` | wide         | `#spec` — client tabs        |
-| 9   | `IntegrationsSection`      | wide         | `#integrations`              |
-| 10  | `PatientExperienceSection` | split, right | `#patients`                  |
-| 11  | `SecuritySection`          | split, left  | `#security` anchor           |
-| 12  | `ComplianceSection`        | wide alt     | `#compliance`                |
-| 13  | `StatsSection`             | wide alt     | `#stats` — capability stats  |
-| 14  | `TestimonialsSection`      | wide         | `#testi` — carousel          |
-| 15  | `StoriesSection`           | wide         | `#stories` — Lampros Stories |
-| 16  | `PricingSection`           | wide         | `#pricing`                   |
-| 17  | `FaqSection`               | wide alt     | `#faq`                       |
-| 18  | `FinalCtaSection`          | split, right | `.anchor` — founder + WhatsApp |
+| 2   | `TrustedByStrip`           | compact wide | `#trusted` — marquee cities                |
+| 3   | `RealitySection`           | split, right | `.anchor`                                  |
+| 4   | `ImagineSection`           | split, left  | `.anchor`                                  |
+| 5   | `PlatformSection`          | split, right | `.anchor`                                  |
+| 6   | `ProductDemoSection`       | wide alt     | `#seeit` — client, GSAP demo               |
+| 7   | `WhyDoctorsSection`        | split, left  | `.anchor`                                  |
+| 8   | `SpecialtyShowcaseSection` | wide         | `#spec` — client tabs                      |
+| 9   | `IntegrationsSection`      | wide         | `#integrations`                            |
+| 10  | `PatientExperienceSection` | split, right | `#patients`                                |
+| 11  | `SecuritySection`          | split, left  | `#security` anchor                         |
+| 12  | `ComplianceSection`        | wide alt     | `#compliance`                              |
+| 13  | `StatsSection`             | wide alt     | `#stats` — capability stats                |
+| 14  | `TestimonialsSection`      | wide         | `#testi` — carousel                        |
+| 15  | `StoriesSection`           | wide         | `#stories` — Lampros Stories               |
+| 16  | `PricingSection`           | wide         | `#pricing`                                 |
+| 17  | `FaqSection`               | wide alt     | `#faq`                                     |
+| 18  | `FinalCtaSection`          | split, right | `.anchor` — founder + WhatsApp             |
 
 **Particle canvas:** sections that drive the 3D shape morph must include class `anchor` via `SplitSection` (`anchor` prop default `true`). Wide sections hide the particle cloud (handled in `lib/particle-scene.ts`).
 

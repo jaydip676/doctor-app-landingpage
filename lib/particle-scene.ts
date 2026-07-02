@@ -10,6 +10,24 @@ var reduce = window.matchMedia(
         var chars = "·∙•+┼▪";
         var INK = [11, 20, 17],
           CORAL = [255, 106, 69];
+        function themeParticleInkRgb() {
+          var raw = getComputedStyle(document.documentElement)
+            .getPropertyValue("--particle-ink")
+            .trim();
+          var parts = raw.split(",").map(function (p) {
+            return parseInt(p.trim(), 10);
+          });
+          if (parts.length >= 3 && parts.every(function (n) {
+            return !isNaN(n);
+          })) {
+            return parts.slice(0, 3);
+          }
+          return [11, 20, 17];
+        }
+        function refreshThemeColors() {
+          TEAL = themeAccentRgb();
+          INK = themeParticleInkRgb();
+        }
         function themeAccentRgb() {
           var raw = getComputedStyle(document.documentElement)
             .getPropertyValue("--teal")
@@ -25,6 +43,12 @@ var reduce = window.matchMedia(
           return [15, 161, 124];
         }
         var TEAL = themeAccentRgb();
+        INK = themeParticleInkRgb();
+        var themeObserver = new MutationObserver(refreshThemeColors);
+        themeObserver.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["data-color-mode", "data-theme"],
+        });
         var N = isMobile ? 1800 : 3800;
 
         /* ---------- shape generators ---------- */
@@ -542,6 +566,7 @@ var reduce = window.matchMedia(
         
   return function cleanup() {
     stop();
+    themeObserver.disconnect();
     window.removeEventListener("resize", resize);
   };
 }

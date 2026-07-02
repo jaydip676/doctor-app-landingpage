@@ -92,7 +92,7 @@ export function PricingSection() {
               href="mailto:hello@lampros.tech"
               className={`block text-center font-semibold text-sm py-[13px] rounded-full border ${
                 plan.popular
-                  ? "bg-[var(--btn-primary-bg)] !text-white border-[var(--btn-primary-bg)]"
+                  ? "bg-[var(--btn-primary-bg)] !text-[var(--btn-primary-fg)] border-[var(--btn-primary-bg)]"
                   : "border-line"
               }`}
             >

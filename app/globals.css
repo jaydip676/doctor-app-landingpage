@@ -1,37 +1,8 @@
 @import "tailwindcss";
+@import "./theme-vars.css";
 
 :root {
-  --canvas: #f2f4f2;
-  --surface: #ffffff;
-  --ink: #0b1411;
-  --ink-soft: #5b6b65;
-  --ink-faint: #8a988f;
-  --line: #e3eae6;
-  --teal: #0fa17c;
-  --teal-ink: #0a6a52;
-  --teal-tint: #e5f4ef;
-  --coral: #ff6a45;
-  --shadow-card:
-    0 1px 2px rgba(11, 20, 17, 0.05),
-    0 24px 50px -28px rgba(11, 20, 17, 0.22);
-  --btn-primary-bg: var(--ink);
-  --btn-primary-shadow: var(--shadow-card);
-  --shadow-popular: 0 24px 50px -30px rgba(15, 161, 124, 0.5);
-  --canvas-fade: 242, 244, 242;
   --announcement-height: 42px;
-}
-
-/* Indigo comparison homepage — /purple (accent rgb(99, 102, 241)); page bg matches teal / */
-html[data-theme="indigo"] {
-  --teal: rgb(99, 102, 241);
-  --teal-ink: rgb(79, 70, 229);
-  --teal-tint: rgb(238, 242, 255);
-  --color-teal: rgb(99, 102, 241);
-  --color-teal-ink: rgb(79, 70, 229);
-  --color-teal-tint: rgb(238, 242, 255);
-  --btn-primary-bg: rgb(99, 102, 241);
-  --btn-primary-shadow: 0px 10px 22px rgba(99, 102, 241, 0.24);
-  --shadow-popular: 0 24px 50px -30px rgba(99, 102, 241, 0.45);
 }
 
 @theme inline {
@@ -53,6 +24,36 @@ html[data-theme="indigo"] {
 
 html {
   scroll-padding-top: calc(var(--announcement-height) + 76px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.42s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  html.theme-transition body,
+  html.theme-transition body *:not(canvas):not(svg.demo-cursor) {
+    transition:
+      background-color 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+      fill 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+      stroke 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@keyframes theme-icon-in {
+  from {
+    opacity: 0;
+    transform: rotate(-28deg) scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
 }
 
 @keyframes lampros-marquee {

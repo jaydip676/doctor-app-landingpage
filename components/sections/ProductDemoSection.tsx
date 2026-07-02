@@ -254,7 +254,7 @@ export function ProductDemoSection() {
         </div>
 
         <div className="demo-stage relative border border-line rounded-[20px] bg-surface shadow-[var(--shadow-card)] overflow-hidden max-w-[1000px] mx-auto motion-reveal">
-          <div className="flex items-center gap-2 px-4 py-3 border-b border-line bg-[#fafbfa]">
+          <div className="flex items-center gap-2 px-4 py-3 border-b border-line bg-[var(--app-chrome)]">
             <i className="w-2.5 h-2.5 rounded-full bg-line" />
             <i className="w-2.5 h-2.5 rounded-full bg-line" />
             <i className="w-2.5 h-2.5 rounded-full bg-line" />
@@ -267,7 +267,7 @@ export function ProductDemoSection() {
             </span>
           </div>
           <div className="grid grid-cols-1 min-[680px]:grid-cols-[188px_1fr] min-h-[420px]">
-            <aside className="hidden min-[680px]:block border-r border-line p-4 bg-[#fcfdfc]">
+            <aside className="hidden min-[680px]:block border-r border-line p-4 bg-[var(--demo-sidebar)]">
               <div className="font-display font-bold text-base mb-4 pl-1.5">
                 Lampros<b className="text-teal">.</b>
               </div>
@@ -384,7 +384,7 @@ export function ProductDemoSection() {
                   <div className="text-[13px] text-ink-soft mb-4">
                     Riya Shah · auto-filled from history
                   </div>
-                  <div className="border border-line rounded-[11px] p-4 mb-2">
+                  <div className="border border-line rounded-[11px] p-4 mb-2 bg-[var(--demo-sidebar)]">
                     {[
                       ["Amlodipine 5mg", "1-0-0 · 30 days"],
                       ["Telmisartan 40mg", "0-0-1 · 30 days"],
@@ -426,7 +426,7 @@ export function ProductDemoSection() {
                         <span>{v}</span>
                       </div>
                     ))}
-                    <div className="flex justify-between font-bold text-[13.5px] px-4 py-2.5 bg-[#fafbfa]">
+                    <div className="flex justify-between font-bold text-[13.5px] px-4 py-2.5 bg-[var(--app-chrome)]">
                       <span>Total</span>
                       <span>₹1,220</span>
                     </div>
@@ -476,7 +476,7 @@ export function ProductDemoSection() {
               )}
 
               {toast ? (
-                <div className="absolute right-6 bottom-5 bg-ink text-white text-[13px] font-medium px-4 py-2.5 rounded-xl flex items-center gap-2 shadow-card z-[6]">
+                <div className="absolute right-6 bottom-5 bg-[var(--demo-toast-bg)] text-[var(--demo-toast-fg)] text-[13px] font-medium px-4 py-2.5 rounded-xl flex items-center gap-2 shadow-card border border-line z-[6]">
                   <span className="w-[18px] h-[18px] rounded-full bg-teal flex items-center justify-center text-[11px]">
                     ✓
                   </span>
@@ -486,10 +486,10 @@ export function ProductDemoSection() {
 
               <svg
                 ref={cursorRef}
-                className="demo-cursor absolute z-[8] w-[22px] h-[22px] pointer-events-none drop-shadow-md [&.demo-click]:after:content-[''] [&.demo-click]:after:absolute [&.demo-click]:after:-left-2 [&.demo-click]:after:-top-2 [&.demo-click]:after:w-10 [&.demo-click]:after:h-10 [&.demo-click]:after:rounded-full [&.demo-click]:after:border-2 [&.demo-click]:after:border-teal [&.demo-click]:after:animate-[lampros-cursor-ring_0.5s_ease-out]"
+                className="demo-cursor absolute z-[8] w-[22px] h-[22px] pointer-events-none drop-shadow-md text-[var(--demo-cursor-fill)] [&.demo-click]:after:content-[''] [&.demo-click]:after:absolute [&.demo-click]:after:-left-2 [&.demo-click]:after:-top-2 [&.demo-click]:after:w-10 [&.demo-click]:after:h-10 [&.demo-click]:after:rounded-full [&.demo-click]:after:border-2 [&.demo-click]:after:border-teal [&.demo-click]:after:animate-[lampros-cursor-ring_0.5s_ease-out]"
                 viewBox="0 0 24 24"
-                fill="#0B1411"
-                stroke="#fff"
+                fill="currentColor"
+                stroke="var(--surface)"
                 strokeWidth="1.4"
               >
                 <path d="M5 3l15 9-6 1.5L18 20l-3 1.5L11 14l-4 4z" />

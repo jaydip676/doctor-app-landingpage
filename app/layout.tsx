@@ -4,6 +4,8 @@ import {
   Inter,
   JetBrains_Mono,
 } from "next/font/google";
+import { ColorModeSync } from "@/components/layout/ColorModeSync";
+import { colorModeBootScript } from "@/lib/theme/apply-theme";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -39,8 +41,19 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${bricolage.variable} ${inter.variable} ${jetbrains.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full overflow-x-hidden">{children}</body>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: colorModeBootScript(),
+          }}
+        />
+      </head>
+      <body className="min-h-full overflow-x-hidden">
+        <ColorModeSync />
+        {children}
+      </body>
     </html>
   );
 }
