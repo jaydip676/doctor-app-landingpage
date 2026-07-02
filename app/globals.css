@@ -1,26 +1,246 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --canvas: #f2f4f2;
+  --surface: #ffffff;
+  --ink: #0b1411;
+  --ink-soft: #5b6b65;
+  --ink-faint: #8a988f;
+  --line: #e3eae6;
+  --teal: #0fa17c;
+  --teal-ink: #0a6a52;
+  --teal-tint: #e5f4ef;
+  --coral: #ff6a45;
+  --shadow-card:
+    0 1px 2px rgba(11, 20, 17, 0.05),
+    0 24px 50px -28px rgba(11, 20, 17, 0.22);
+  --btn-primary-bg: var(--ink);
+  --btn-primary-shadow: var(--shadow-card);
+  --shadow-popular: 0 24px 50px -30px rgba(15, 161, 124, 0.5);
+  --canvas-fade: 242, 244, 242;
+  --announcement-height: 42px;
+}
+
+/* Indigo comparison homepage — /purple (accent rgb(99, 102, 241)); page bg matches teal / */
+html[data-theme="indigo"] {
+  --teal: rgb(99, 102, 241);
+  --teal-ink: rgb(79, 70, 229);
+  --teal-tint: rgb(238, 242, 255);
+  --color-teal: rgb(99, 102, 241);
+  --color-teal-ink: rgb(79, 70, 229);
+  --color-teal-tint: rgb(238, 242, 255);
+  --btn-primary-bg: rgb(99, 102, 241);
+  --btn-primary-shadow: 0px 10px 22px rgba(99, 102, 241, 0.24);
+  --shadow-popular: 0 24px 50px -30px rgba(99, 102, 241, 0.45);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-teal: var(--teal);
+  --color-teal-ink: var(--teal-ink);
+  --color-teal-tint: var(--teal-tint);
+  --color-coral: var(--coral);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-bricolage);
+  --font-mono: var(--font-jetbrains);
+  --shadow-card: var(--shadow-card);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-padding-top: calc(var(--announcement-height) + 76px);
+}
+
+@keyframes lampros-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes testimonial-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes testimonial-exit {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(-48px, 0, 0);
+  }
+}
+
+@keyframes testimonial-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(48px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+/* Fixed grid behind particle canvas (matches HTML .grid) */
+.lampros-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.36;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: clamp(90px, 11vw, 150px) clamp(90px, 11vw, 150px);
+  -webkit-mask-image: radial-gradient(
+    130% 100% at 50% 40%,
+    #000 56%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    130% 100% at 50% 40%,
+    #000 56%,
+    transparent 100%
+  );
+}
+
+/* Split copy panels — gradients match .sec.sr / .sec.sl .copy */
+.copy-panel-left {
+  background: linear-gradient(
+    90deg,
+    var(--canvas) 60%,
+    rgba(var(--canvas-fade), 0)
+  );
+}
+
+.copy-panel-right {
+  background: linear-gradient(
+    270deg,
+    var(--canvas) 60%,
+    rgba(var(--canvas-fade), 0)
+  );
+}
+
+/* Hero: wider readable band; particles may show through the faded edge */
+.copy-panel-hero {
+  background: linear-gradient(
+    90deg,
+    var(--canvas) 0%,
+    var(--canvas) 72%,
+    rgba(var(--canvas-fade), 0.55) 88%,
+    rgba(var(--canvas-fade), 0) 100%
+  );
+}
+
+@media (max-width: 900px) {
+  .copy-panel-left,
+  .copy-panel-right,
+  .copy-panel-hero {
+    background: linear-gradient(
+      180deg,
+      rgba(var(--canvas-fade), 0.85),
+      rgba(var(--canvas-fade), 0.5)
+    );
+  }
+}
+
+/* Scroll cue bar animation */
+.lampros-cue-bar::after {
+  content: "";
+  position: absolute;
+  left: -40%;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  background: var(--teal);
+  animation: lampros-cue-slide 1.8s ease-in-out infinite;
+}
+
+@keyframes lampros-cue-slide {
+  to {
+    left: 140%;
+  }
+}
+
+@keyframes lampros-live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes lampros-cursor-ring {
+  from {
+    transform: scale(0.2);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Scroll / hero motion — start hidden; GSAP animates TO visible (avoids flash) */
+@media (prefers-reduced-motion: no-preference) {
+  .motion-reveal {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, 24px, 0);
+    will-change: transform, opacity;
+  }
+
+  .motion-in {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, 18px, 0);
+    will-change: transform, opacity;
+  }
+
+  .nav {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, -16px, 0);
+    will-change: transform, opacity;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-reveal,
+  .motion-in,
+  .nav {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
 }
