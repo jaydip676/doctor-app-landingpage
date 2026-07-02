@@ -126,11 +126,7 @@ body {
     #000 56%,
     transparent 100%
   );
-  mask-image: radial-gradient(
-    130% 100% at 50% 40%,
-    #000 56%,
-    transparent 100%
-  );
+  mask-image: radial-gradient(130% 100% at 50% 40%, #000 56%, transparent 100%);
 }
 
 /* Split copy panels — gradients match .sec.sr / .sec.sl .copy */

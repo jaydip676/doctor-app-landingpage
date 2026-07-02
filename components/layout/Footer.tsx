@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Brand } from "@/components/ui/Typography";
+import { splitContainerClass } from "@/lib/layout";
 
 const columns = [
   {
@@ -24,7 +25,7 @@ const columns = [
 export function Footer() {
   return (
     <footer className="relative z-[3] bg-canvas border-t border-line">
-      <div className="max-w-[1360px] mx-auto px-5 sm:px-[clamp(20px,5vw,56px)] py-[46px] grid grid-cols-2 md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-7">
+      <div className={`${splitContainerClass} py-[46px] grid grid-cols-2 md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-7`}>
         <div>
           <div className="text-lg">
             <Brand />
@@ -51,7 +52,9 @@ export function Footer() {
           </div>
         ))}
       </div>
-      <div className="border-t border-line px-5 sm:px-[clamp(20px,5vw,56px)] py-[18px] max-w-[1360px] mx-auto text-[12.5px] text-ink-faint">
+      <div
+        className={`border-t border-line py-[18px] ${splitContainerClass} text-[12.5px] text-ink-faint`}
+      >
         © 2026 Lampros Healthcare. All rights reserved. Made for clinics that
         want to run as one.
       </div>

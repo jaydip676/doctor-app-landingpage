@@ -2,23 +2,16 @@ import {
   ALL_THEME_VAR_KEYS,
   resolveThemeVars,
 } from "@/lib/theme/tokens";
-import type { BrandAccent, ColorMode } from "@/lib/theme/types";
+import type { ColorMode } from "@/lib/theme/types";
 
 export const COLOR_MODE_STORAGE_KEY = "lampros-color-mode";
 
-export function readBrandAccent(): BrandAccent {
-  if (typeof document === "undefined") return "teal";
-  return document.documentElement.getAttribute("data-theme") === "indigo"
-    ? "indigo"
-    : "teal";
-}
-
-export function applyTheme(colorMode: ColorMode, brand?: BrandAccent) {
-  const resolvedBrand = brand ?? readBrandAccent();
-  const vars = resolveThemeVars(colorMode, resolvedBrand);
+export function applyTheme(colorMode: ColorMode) {
+  const vars = resolveThemeVars(colorMode);
   const root = document.documentElement;
 
   root.setAttribute("data-color-mode", colorMode);
+  root.setAttribute("data-theme", "indigo");
   root.classList.toggle("dark", colorMode === "dark");
 
   for (const key of ALL_THEME_VAR_KEYS) {
@@ -57,7 +50,7 @@ export function getColorModeServerSnapshot(): ColorMode {
 }
 
 export function refreshThemeAppearance() {
-  applyTheme(readColorMode(), readBrandAccent());
+  applyTheme(readColorMode());
 }
 
 export function persistColorMode(mode: ColorMode) {
@@ -125,25 +118,17 @@ export function getStoredColorMode(): ColorMode {
 
 export function colorModeBootScript(): string {
   const storageKey = JSON.stringify(COLOR_MODE_STORAGE_KEY);
-  const lightTeal = JSON.stringify(resolveThemeVars("light", "teal"));
-  const darkTeal = JSON.stringify(resolveThemeVars("dark", "teal"));
-  const darkIndigo = JSON.stringify(resolveThemeVars("dark", "indigo"));
-  const lightIndigo = JSON.stringify(resolveThemeVars("light", "indigo"));
+  const lightVars = JSON.stringify(resolveThemeVars("light"));
+  const darkVars = JSON.stringify(resolveThemeVars("dark"));
 
   return `(function(){
 try{
   var r=document.documentElement;
   var mode=localStorage.getItem(${storageKey});
   if(mode!=="dark"&&mode!=="light")mode="light";
-  var brand=r.getAttribute("data-theme")==="indigo"?"indigo":"teal";
-  var map={
-    "light-teal":${lightTeal},
-    "light-indigo":${lightIndigo},
-    "dark-teal":${darkTeal},
-    "dark-indigo":${darkIndigo}
-  };
-  var v=map[mode+"-"+brand]||map["light-teal"];
+  var v=mode==="dark"?${darkVars}:${lightVars};
   r.setAttribute("data-color-mode",mode);
+  r.setAttribute("data-theme","indigo");
   if(mode==="dark")r.classList.add("dark");else r.classList.remove("dark");
   for(var k in v)if(Object.prototype.hasOwnProperty.call(v,k))r.style.setProperty(k,v[k]);
 }catch(e){}

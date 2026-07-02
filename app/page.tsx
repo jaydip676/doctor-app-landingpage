@@ -3,7 +3,7 @@ import { ThemeShell } from "@/components/layout/ThemeShell";
 
 export default function Home() {
   return (
-    <ThemeShell theme="teal">
+    <ThemeShell>
       <HomePage />
     </ThemeShell>
   );

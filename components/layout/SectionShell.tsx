@@ -1,4 +1,9 @@
 import type { ReactNode } from "react";
+import {
+  splitAlignLeftClass,
+  splitContainerClass,
+  wideContainerClass,
+} from "@/lib/layout";
 
 type Align = "left" | "right";
 
@@ -46,10 +51,10 @@ export function SplitSection({
         } ${anchor ? "anchor" : ""}`}
     >
       <div
-        className={`max-w-[1360px] mx-auto w-full px-5 sm:px-[clamp(20px,5vw,56px)] py-24 grid grid-cols-1 min-[901px]:grid-cols-2 gap-[30px] items-center ${wideContent ? "min-[901px]:gap-0" : ""}`}
+        className={`${splitContainerClass} py-[clamp(72px,12vh,96px)] grid grid-cols-1 min-[901px]:grid-cols-2 gap-[30px] items-center ${wideContent ? "min-[901px]:gap-0" : ""}`}
       >
         <div
-          className={`relative z-[4] w-full min-w-0 p-[26px] rounded-[18px] ${copyWidth} ${copyGrid} ${copyPanel}`}
+          className={`relative z-[4] w-full min-w-0 p-5 sm:p-[26px] rounded-[18px] ${copyWidth} ${copyGrid} ${copyPanel}`}
         >
           {children}
         </div>
@@ -61,7 +66,9 @@ export function SplitSection({
         ) : null}
       </div>
       {scrollCue ? (
-        <div className="absolute bottom-[26px] left-5 sm:left-[clamp(20px,5vw,56px)] z-[4] flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-ink-faint">
+        <div
+          className={`absolute bottom-[26px] ${splitAlignLeftClass} z-[4] flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-ink-faint`}
+        >
           Scroll
           <span className="lampros-cue-bar relative w-[34px] h-px bg-ink-faint overflow-hidden" />
         </div>
@@ -84,7 +91,7 @@ export function WideSection({
       id={id}
       className={`relative z-[3] ${alt ? "bg-surface border-y border-line" : ""}`}
     >
-      <div className="max-w-[1180px] mx-auto w-full px-5 sm:px-[clamp(20px,5vw,56px)] py-[clamp(70px,10vh,120px)]">
+      <div className={`${wideContainerClass} py-[clamp(70px,10vh,120px)]`}>
         {children}
       </div>
     </section>

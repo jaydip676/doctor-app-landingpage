@@ -1,4 +1,5 @@
 import { trustedPartners } from "@/lib/home-content";
+import { wideContainerClass } from "@/lib/layout";
 
 export function TrustedByStrip() {
   const items = [...trustedPartners, ...trustedPartners];
@@ -8,7 +9,7 @@ export function TrustedByStrip() {
       id="trusted"
       className="relative z-[3] border-y border-line bg-surface"
     >
-      <div className="max-w-[1180px] mx-auto w-full px-5 sm:px-[clamp(20px,5vw,56px)] py-10 sm:py-12">
+      <div className={`${wideContainerClass} py-10 sm:py-12`}>
         <p className="text-center text-[12px] uppercase tracking-[0.14em] text-ink-faint font-semibold mb-5 motion-reveal">
           Trusted by clinics across Gujarat &amp; Maharashtra
         </p>
