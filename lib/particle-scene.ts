@@ -1,12 +1,12 @@
 // @ts-nocheck
 export function initParticleScene(canvas: HTMLCanvasElement): () => void {
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var isMobile = window.matchMedia("(max-width:760px)").matches;
   var mobileLight =
     typeof process !== "undefined" &&
     process.env.NEXT_PUBLIC_REDUCE_MOTION_ON_MOBILE === "true" &&
     isMobile;
   var reduce = reduceMotion || mobileLight;
-  var isMobile = window.matchMedia("(max-width:760px)").matches;
   var ctx = canvas.getContext("2d");
   if (!ctx) return function cleanup() {};
   var chars = "·∙•+┼▪";
@@ -310,6 +310,7 @@ export function initParticleScene(canvas: HTMLCanvasElement): () => void {
     running = false,
     proj = [];
   function resize() {
+    isMobile = window.matchMedia("(max-width:760px)").matches;
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     var r = canvas.getBoundingClientRect();
     W = r.width;

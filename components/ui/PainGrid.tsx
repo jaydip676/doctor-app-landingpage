@@ -72,7 +72,8 @@ export type PainGridItem = {
 
 export function PainGrid({ items }: { items: PainGridItem[] }) {
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,150px),1fr))] gap-[10px] mt-6">
+    <div className="@container w-full min-w-0">
+      <div className="grid grid-cols-1 @min-[310px]:grid-cols-2 gap-[10px] mt-6">
       {items.map((item) => (
         <div
           key={item.label}
@@ -84,6 +85,7 @@ export function PainGrid({ items }: { items: PainGridItem[] }) {
           <span className="leading-snug">{item.label}</span>
         </div>
       ))}
+      </div>
     </div>
   );
 }

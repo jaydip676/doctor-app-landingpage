@@ -3,20 +3,19 @@
 import { useEffect } from "react";
 
 const DEBOUNCE_MS = 450;
-/** Ignore small height-only shifts (mobile browser chrome). */
-const MIN_HEIGHT_DELTA_PX = 72;
+/** Ignore sub-pixel width noise from mobile browsers. */
+const MIN_WIDTH_DELTA_PX = 2;
 const SCROLL_RESTORE_KEY = "lampros-resize-reload-scroll";
 
-function shouldReload(
-  startW: number,
-  startH: number,
-  nextW: number,
-  nextH: number,
-): boolean {
-  const dw = Math.abs(nextW - startW);
-  const dh = Math.abs(nextH - startH);
-  if (dw > 0) return true;
-  return dh >= MIN_HEIGHT_DELTA_PX;
+function shouldReload(startW: number, nextW: number): boolean {
+  return Math.abs(nextW - startW) >= MIN_WIDTH_DELTA_PX;
+}
+
+function restoreScroll(y: number) {
+  const apply = () => window.scrollTo(0, y);
+  requestAnimationFrame(() => {
+    requestAnimationFrame(apply);
+  });
 }
 
 export function ResizeReload() {
@@ -26,29 +25,35 @@ export function ResizeReload() {
       sessionStorage.removeItem(SCROLL_RESTORE_KEY);
       const y = Number(savedScroll);
       if (Number.isFinite(y) && y > 0) {
-        requestAnimationFrame(() => window.scrollTo(0, y));
+        restoreScroll(y);
       }
     }
 
     let width = window.innerWidth;
-    let height = window.innerHeight;
     let timer: ReturnType<typeof setTimeout> | undefined;
 
-    const onResize = () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        const nextW = window.innerWidth;
-        const nextH = window.innerHeight;
-        if (!shouldReload(width, height, nextW, nextH)) return;
+    const checkDimensions = () => {
+      const nextW = window.innerWidth;
+      if (shouldReload(width, nextW)) {
         sessionStorage.setItem(SCROLL_RESTORE_KEY, String(window.scrollY));
         window.location.reload();
-      }, DEBOUNCE_MS);
+        return;
+      }
+      width = nextW;
     };
 
-    window.addEventListener("resize", onResize);
+    const scheduleCheck = () => {
+      clearTimeout(timer);
+      timer = setTimeout(checkDimensions, DEBOUNCE_MS);
+    };
+
+    window.addEventListener("resize", scheduleCheck);
+    window.addEventListener("orientationchange", scheduleCheck);
+
     return () => {
       clearTimeout(timer);
-      window.removeEventListener("resize", onResize);
+      window.removeEventListener("resize", scheduleCheck);
+      window.removeEventListener("orientationchange", scheduleCheck);
     };
   }, []);
 
