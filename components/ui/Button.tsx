@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { isExternalUrl } from "@/lib/book-demo-url";
 
 type ButtonVariant = "primary" | "ghost";
 
@@ -24,8 +25,15 @@ export function Button({
 }) {
   const className = `${base} ${variants[variant]}`;
   if (href) {
+    const external = isExternalUrl(href);
     return (
-      <Link href={href} className={className}>
+      <Link
+        href={href}
+        className={className}
+        {...(external
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : {})}
+      >
         {children}
       </Link>
     );

@@ -88,7 +88,7 @@ export function VideoTourTrigger({ className = "" }: { className?: string }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={`inline-flex w-fit max-w-full shrink-0 items-center gap-2.5 font-semibold text-[15px] text-ink border border-line bg-[var(--btn-ghost-fill)] px-5 py-[15px] rounded-full hover:border-ink-faint transition-colors ${className}`}
+        className={`inline-flex w-fit max-w-full shrink-0 cursor-pointer items-center gap-2.5 font-semibold text-[15px] text-ink border border-line bg-[var(--btn-ghost-fill)] px-5 py-[15px] rounded-full hover:border-ink-faint transition-colors ${className}`}
       >
         <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal text-white">
 

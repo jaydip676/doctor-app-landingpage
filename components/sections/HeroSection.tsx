@@ -2,6 +2,7 @@ import { ArrowIcon } from "@/components/ui/ArrowIcon";
 import { Button } from "@/components/ui/Button";
 import { SplitSection } from "@/components/layout/SectionShell";
 import { VideoTourTrigger } from "@/components/sections/VideoTourModal";
+import { bookDemoUrl } from "@/lib/book-demo-url";
 import {
   Accent,
   Eyebrow,
@@ -32,11 +33,8 @@ export function HeroSection() {
         </span>
       </Lede>
       <div className="flex flex-wrap items-center gap-3 mt-[28px] motion-in">
-        <Button href="mailto:hello@lampros.tech">
-          Start free trial <ArrowIcon />
-        </Button>
-        <Button variant="ghost" href="tel:+919033779620">
-          Book live demo
+        <Button href={bookDemoUrl}>
+          Book live demo <ArrowIcon />
         </Button>
         <VideoTourTrigger />
       </div>

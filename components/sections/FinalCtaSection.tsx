@@ -7,6 +7,7 @@ import {
   Lede,
   SectionTitle,
 } from "@/components/ui/Typography";
+import { bookDemoUrl } from "@/lib/book-demo-url";
 
 export function FinalCtaSection() {
   return (
@@ -22,16 +23,12 @@ export function FinalCtaSection() {
       </SectionTitle>
       <Lede>
         <span className="motion-reveal">
-          Start free in minutes, or book a 20-minute live demo on a real demo
-          clinic — no setup needed.
+          Book a 20-minute live demo on a real demo clinic — no setup needed.
         </span>
       </Lede>
       <div className="flex flex-wrap gap-3 mt-[28px] motion-reveal">
-        <Button href="mailto:hello@lampros.tech">
-          Start free trial <ArrowIcon />
-        </Button>
-        <Button variant="ghost" href="tel:+919033779620">
-          Book demo
+        <Button href={bookDemoUrl}>
+          Book a demo <ArrowIcon />
         </Button>
       </div>
     </SplitSection>

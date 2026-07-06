@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { bookDemoUrl, isExternalUrl } from "@/lib/book-demo-url";
 import { ColorModeToggle } from "@/components/ui/ColorModeToggle";
 import { Brand } from "@/components/ui/Typography";
 import { splitContainerClass } from "@/lib/layout";
@@ -98,10 +99,13 @@ export function SiteNav() {
           </div>
           <div className="flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
             <Link
-              href="#"
-              className="text-[13px] sm:text-sm font-semibold px-3.5 sm:px-[18px] py-2 sm:py-2.5 rounded-full bg-[var(--btn-primary-bg)] !text-[var(--btn-primary-fg)] shadow-[var(--btn-primary-shadow)] whitespace-nowrap"
+              href={bookDemoUrl}
+              className="inline-flex items-center text-[13px] sm:text-sm font-semibold px-3.5 sm:px-[18px] py-2 sm:py-2.5 rounded-full bg-[var(--btn-primary-bg)] !text-[var(--btn-primary-fg)] shadow-[var(--btn-primary-shadow)] whitespace-nowrap cursor-pointer hover:-translate-y-0.5 transition-transform duration-[250ms]"
+              {...(isExternalUrl(bookDemoUrl)
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
             >
-              Sign in
+              Book a demo
             </Link>
             <div className="hidden min-[901px]:flex items-center rounded-full border border-line bg-[var(--theme-toggle-bar-bg)] p-1 backdrop-blur-sm shrink-0">
               <ColorModeToggle />
