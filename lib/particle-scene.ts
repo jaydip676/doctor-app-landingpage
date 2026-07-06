@@ -1,7 +1,11 @@
-/* Ported from home/lampros-healthcare.html */
 // @ts-nocheck
 export function initParticleScene(canvas: HTMLCanvasElement): () => void {
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var mobileLight =
+    typeof process !== "undefined" &&
+    process.env.NEXT_PUBLIC_REDUCE_MOTION_ON_MOBILE === "true" &&
+    isMobile;
+  var reduce = reduceMotion || mobileLight;
   var isMobile = window.matchMedia("(max-width:760px)").matches;
   var ctx = canvas.getContext("2d");
   if (!ctx) return function cleanup() {};

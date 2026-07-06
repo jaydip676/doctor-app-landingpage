@@ -1,8 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { WideHeader, WideSection } from "@/components/layout/SectionShell";
+import {
+  getLightMotionSnapshot,
+  subscribeLightMotion,
+} from "@/lib/motion-preference";
 import { specialties } from "@/lib/specialties";
+
+const ROTATE_MS = 5000;
 
 function KpiGrid({
   values,
@@ -27,7 +33,25 @@ function KpiGrid({
 
 export function SpecialtyShowcaseSection() {
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [lightMotion, setLightMotion] = useState(false);
   const spec = specialties[active];
+
+  useEffect(() => {
+    const update = () => setLightMotion(getLightMotionSnapshot());
+    update();
+    return subscribeLightMotion(update);
+  }, []);
+
+  useEffect(() => {
+    if (lightMotion || paused) return;
+
+    const id = window.setInterval(() => {
+      setActive((i) => (i + 1) % specialties.length);
+    }, ROTATE_MS);
+
+    return () => window.clearInterval(id);
+  }, [lightMotion, paused]);
 
   return (
     <WideSection id="spec">
@@ -35,23 +59,47 @@ export function SpecialtyShowcaseSection() {
         title="Built for every specialty."
         description="The same system, tuned to how your practice actually works."
       />
-      <div className="flex flex-wrap gap-2 justify-center mb-6 motion-reveal">
+      <div
+        className="flex flex-wrap gap-2 justify-center mb-6 motion-reveal"
+        role="tablist"
+        aria-label="Specialties"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocusCapture={() => setPaused(true)}
+        onBlurCapture={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+            setPaused(false);
+          }
+        }}
+      >
         {specialties.map((s, i) => (
           <button
             key={s.slug}
             type="button"
+            role="tab"
+            id={`spec-tab-btn-${s.slug}`}
+            aria-selected={i === active}
+            aria-controls="spec-panel"
             onClick={() => setActive(i)}
-            className={`text-[13px] font-semibold px-4 py-2 rounded-full border transition ${
+            className={`text-[13px] font-semibold px-4 py-2 rounded-full border transition-colors duration-300 ${
               i === active
                 ? "bg-teal text-white border-teal"
-                : "bg-surface text-ink-soft border-line"
+                : "bg-surface text-ink-soft border-line hover:border-ink-faint"
             }`}
           >
             {s.title.replace(" workspace", "")}
           </button>
         ))}
       </div>
-      <div className="max-w-[880px] mx-auto border border-line rounded-[18px] bg-surface shadow-[var(--shadow-card)] overflow-hidden motion-reveal">
+      <div
+        id="spec-panel"
+        className="max-w-[880px] mx-auto border border-line rounded-[18px] bg-surface shadow-[var(--shadow-card)] overflow-hidden motion-reveal"
+        role="tabpanel"
+        aria-live="polite"
+        aria-labelledby={`spec-tab-btn-${spec.slug}`}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
         <div className="flex items-center gap-2 px-4 py-3 border-b border-line bg-[var(--app-chrome)]">
           <i className="w-2.5 h-2.5 rounded-full bg-line" />
           <i className="w-2.5 h-2.5 rounded-full bg-line" />
@@ -60,8 +108,10 @@ export function SpecialtyShowcaseSection() {
             app.lamprosclinic.in / {spec.slug}
           </span>
         </div>
-        <div className="p-6">
-          <div className="font-display font-semibold text-[19px]">{spec.title}</div>
+        <div key={spec.slug} className="p-6 specialty-panel-in">
+          <div className="font-display font-semibold text-[19px]">
+            {spec.title}
+          </div>
           <div className="text-[13px] text-ink-soft mb-4">{spec.subtitle}</div>
           <KpiGrid values={spec.kpis} labels={spec.kpiLabels} />
           <div className="flex items-center justify-between px-3.5 py-3 border border-line rounded-[11px] text-[13.5px] mb-2 bg-surface">

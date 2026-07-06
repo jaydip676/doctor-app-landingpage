@@ -8,8 +8,6 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # Lampros Healthcare landing — agent instructions
 
-**Source of truth for copy and visual design:** `../home/lampros-healthcare.html` (static reference). The Next.js app should match its colors, typography, section order, and UI patterns.
-
 ## Coding style
 
 - Framework: Next.js (App Router), React 19

@@ -3,13 +3,20 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { getLightMotionSnapshot } from "@/lib/motion-preference";
 
 export function HomeMotion() {
   useEffect(() => {
-    const reduce = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reduce) return;
+    const lightMotion = getLightMotionSnapshot();
+    if (lightMotion) {
+      gsap.set([".motion-in", ".motion-reveal", ".nav"], {
+        autoAlpha: 1,
+        y: 0,
+      });
+      const canvas = document.getElementById("scene");
+      if (canvas) gsap.set(canvas, { opacity: 1 });
+      return;
+    }
 
     gsap.registerPlugin(ScrollTrigger);
 

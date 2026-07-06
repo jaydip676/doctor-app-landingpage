@@ -4,6 +4,10 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { WideHeader, WideSection } from "@/components/layout/SectionShell";
 import { testimonials } from "@/lib/home-content";
+import {
+  getLightMotionSnapshot,
+  subscribeLightMotion,
+} from "@/lib/motion-preference";
 
 const ROTATE_MS = 5000;
 const TRANSITION_MS = 550;
@@ -52,11 +56,9 @@ export function TestimonialsSection() {
   const t = testimonials[active];
 
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReducedMotion(mq.matches);
+    const update = () => setReducedMotion(getLightMotionSnapshot());
     update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
+    return subscribeLightMotion(update);
   }, []);
 
   const goTo = useCallback(
@@ -130,7 +132,7 @@ export function TestimonialsSection() {
           </div>
         </div>
         <div
-          className="flex justify-center items-center gap-2 mt-8"
+          className="flex justify-center items-center gap-2.5 sm:gap-2 mt-8"
           role="tablist"
           aria-label="Testimonial slides"
         >
@@ -145,9 +147,10 @@ export function TestimonialsSection() {
                 aria-label={`Show testimonial from ${item.name}`}
                 onClick={() => goTo(i)}
                 disabled={isTransitioning}
-                className={`relative h-2 rounded-full overflow-hidden transition-[width] duration-300 disabled:opacity-70 ${
-                  isActive ? "w-8 bg-line" : "w-2 bg-line hover:bg-ink-faint"
-                }`}
+                className={`relative h-3 sm:h-2 rounded-full overflow-hidden transition-[width] duration-300 disabled:opacity-70 ${isActive
+                    ? "w-12 sm:w-8 bg-line"
+                    : "w-3 sm:w-2 bg-line hover:bg-ink-faint"
+                  }`}
               >
                 {isActive && !reducedMotion ? (
                   <span

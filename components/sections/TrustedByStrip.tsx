@@ -14,11 +14,14 @@ export function TrustedByStrip() {
           Trusted by clinics across Gujarat &amp; Maharashtra
         </p>
         <div className="overflow-hidden motion-reveal [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
-          <div className="flex gap-12 sm:gap-16 w-max animate-[lampros-marquee_40s_linear_infinite]">
+          <div className="flex gap-12 sm:gap-16 w-max lampros-marquee-track">
             {items.map((name, i) => (
               <span
                 key={`${name}-${i}`}
-                className="text-[15px] sm:text-base font-semibold text-ink-soft/70 whitespace-nowrap"
+                className={`text-[15px] sm:text-base font-semibold text-ink-soft/70 whitespace-nowrap ${
+                  i >= trustedPartners.length ? "lampros-marquee-duplicate" : ""
+                }`}
+                aria-hidden={i >= trustedPartners.length ? true : undefined}
               >
                 {name}
               </span>

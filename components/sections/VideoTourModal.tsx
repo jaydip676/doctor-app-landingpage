@@ -88,14 +88,16 @@ export function VideoTourTrigger({ className = "" }: { className?: string }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={`inline-flex items-center gap-2.5 font-semibold text-[15px] text-ink border border-line bg-[var(--btn-ghost-fill)] px-5 py-[15px] rounded-full hover:border-ink-faint transition-colors ${className}`}
+        className={`inline-flex w-fit max-w-full shrink-0 items-center gap-2.5 font-semibold text-[15px] text-ink border border-line bg-[var(--btn-ghost-fill)] px-5 py-[15px] rounded-full hover:border-ink-faint transition-colors ${className}`}
       >
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-teal text-white shrink-0">
-          <svg width="11" height="12" viewBox="0 0 11 12" fill="currentColor" aria-hidden>
-            <path d="M0 0v12l11-6L0 0z" />
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal text-white">
+
+
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.4086 9.35258C23.5305 10.5065 23.5305 13.4935 21.4086 14.6474L8.59662 21.6145C6.53435 22.736 4 21.2763 4 18.9671L4 5.0329C4 2.72368 6.53435 1.26402 8.59661 2.38548L21.4086 9.35258Z" fill="#ffffff" />
           </svg>
         </span>
-        Watch the 90-second tour
+        Watch the tour
       </button>
       <VideoTourModal open={open} onClose={() => setOpen(false)} />
     </>

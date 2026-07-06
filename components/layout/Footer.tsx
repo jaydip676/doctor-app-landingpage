@@ -1,26 +1,7 @@
 import Link from "next/link";
 import { Brand } from "@/components/ui/Typography";
 import { splitContainerClass } from "@/lib/layout";
-
-const columns = [
-  {
-    title: "Platform",
-    links: ["Overview", "Specialties", "Pricing", "Security"],
-  },
-  {
-    title: "Company",
-    links: ["About", "Contact", "Demo clinic", "FAQ"],
-  },
-  {
-    title: "Legal",
-    links: [
-      "Privacy policy",
-      "Communication policy",
-      "Data rights",
-      "Terms",
-    ],
-  },
-];
+import { columns, footerLinkHref } from "@/lib/legal/footer-columns";
 
 export function Footer() {
   return (
@@ -43,7 +24,7 @@ export function Footer() {
             {col.links.map((link) => (
               <Link
                 key={link}
-                href="#"
+                href={footerLinkHref[link]}
                 className="block text-ink-soft text-sm mb-2 hover:text-ink"
               >
                 {link}
@@ -55,8 +36,8 @@ export function Footer() {
       <div
         className={`border-t border-line py-[18px] ${splitContainerClass} text-[12.5px] text-ink-faint`}
       >
-        © 2026 Lampros Healthcare. All rights reserved. Made for clinics that
-        want to run as one.
+        © 2026 LamprosTech · Healthcare Management. All rights reserved.
+        Made for clinics that want to run as one.
       </div>
     </footer>
   );

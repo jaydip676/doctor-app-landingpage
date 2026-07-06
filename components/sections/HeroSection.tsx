@@ -38,7 +38,7 @@ export function HeroSection() {
         <Button variant="ghost" href="tel:+919033779620">
           Book live demo
         </Button>
-        <VideoTourTrigger className="w-full sm:w-auto justify-center" />
+        <VideoTourTrigger />
       </div>
       <div className="flex flex-wrap gap-x-[22px] gap-y-2 mt-[30px] text-[12.5px] text-ink-soft motion-in">
         <span className="text-teal shrink-0">★★★★★</span>

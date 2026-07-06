@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { WideSection } from "@/components/layout/SectionShell";
+import { getLightMotionSnapshot } from "@/lib/motion-preference";
 
 const chapters = [
   "Book",
@@ -83,9 +84,7 @@ export function ProductDemoSection() {
   }, []);
 
   useEffect(() => {
-    const reduce = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const reduce = getLightMotionSnapshot();
     if (reduce) {
       setShowBookRow(true);
       return;
