@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     template: `%s · ${BRAND_LINE}`,
     default: BRAND_LINE,
   },
+  alternates: {
+    canonical: "./",
+  },
 };
 
 export default function StaticLayout({ children }: { children: ReactNode }) {

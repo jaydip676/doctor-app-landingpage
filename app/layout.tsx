@@ -5,6 +5,7 @@ import {
   JetBrains_Mono,
 } from "next/font/google";
 import { ColorModeSync } from "@/components/layout/ColorModeSync";
+import { buildRootMetadata } from "@/lib/site-metadata";
 import { colorModeBootScript } from "@/lib/theme/apply-theme";
 import "./globals.css";
 
@@ -26,11 +27,7 @@ const jetbrains = JetBrains_Mono({
   weight: ["400", "500"],
 });
 
-export const metadata: Metadata = {
-  title: "Lampros Healthcare — your clinic, finally running like it should",
-  description:
-    "Appointments, patients, prescriptions, billing and follow-ups — from one beautifully simple platform.",
-};
+export const metadata: Metadata = buildRootMetadata();
 
 export default function RootLayout({
   children,
