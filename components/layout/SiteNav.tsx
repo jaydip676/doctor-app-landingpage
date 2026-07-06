@@ -12,7 +12,7 @@ const links = [
   { label: "Platform", href: "#seeit" },
   { label: "Specialties", href: "#spec" },
   { label: "Security", href: "#security" },
-  { label: "Resources", href: "#stories" },
+  { label: "Integrations", href: "#integrations" },
 ];
 
 const MENU_TRANSITION_MS = 320;
