@@ -3,6 +3,7 @@ import { BackgroundGrid } from "@/components/layout/BackgroundGrid";
 import { Footer } from "@/components/layout/Footer";
 import { HomeMotion } from "@/components/layout/HomeMotion";
 import { MotionPreferenceSync } from "@/components/layout/MotionPreferenceSync";
+import { ResizeReload } from "@/components/layout/ResizeReload";
 import { ScrollSceneCanvas } from "@/components/layout/ScrollSceneCanvas";
 import { SiteNav } from "@/components/layout/SiteNav";
 import { ComplianceSection } from "@/components/sections/ComplianceSection";
@@ -32,6 +33,7 @@ export function HomePage() {
       <AnnouncementBar />
       <SiteNav />
       <MotionPreferenceSync />
+      <ResizeReload />
       <HomeMotion />
       <div className="relative z-[3]">
         <HeroSection />

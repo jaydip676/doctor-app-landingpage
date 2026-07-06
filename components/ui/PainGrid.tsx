@@ -72,7 +72,7 @@ export type PainGridItem = {
 
 export function PainGrid({ items }: { items: PainGridItem[] }) {
   return (
-    <div className="grid grid-cols-2 gap-[10px] mt-6">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,150px),1fr))] gap-[10px] mt-6">
       {items.map((item) => (
         <div
           key={item.label}

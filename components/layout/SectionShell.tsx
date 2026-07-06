@@ -54,7 +54,7 @@ export function SplitSection({
         className={`${splitContainerClass} py-[clamp(72px,12vh,96px)] grid grid-cols-1 min-[901px]:grid-cols-2 gap-[30px] items-center ${wideContent ? "min-[901px]:gap-0" : ""}`}
       >
         <div
-          className={`relative z-[4] w-full min-w-0 p-5 sm:p-[26px] rounded-[18px] ${copyWidth} ${copyGrid} ${copyPanel}`}
+          className={`relative z-[4] w-full min-w-0 py-5 sm:py-[26px] rounded-[18px] ${copyWidth} ${copyGrid} ${copyPanel}`}
         >
           {children}
         </div>

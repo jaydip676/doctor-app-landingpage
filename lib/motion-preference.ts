@@ -5,10 +5,16 @@ export function reduceMotionOnMobileEnabled(): boolean {
   return process.env.NEXT_PUBLIC_REDUCE_MOTION_ON_MOBILE === "true";
 }
 
+/** System accessibility setting only (not mobile light-motion flag). */
+export function prefersReducedMotion(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
+}
+
 /** OS accessibility setting or optional lighter motion on small screens. */
 export function getLightMotionSnapshot(): boolean {
   if (typeof window === "undefined") return false;
-  if (window.matchMedia(REDUCED_MOTION_QUERY).matches) return true;
+  if (prefersReducedMotion()) return true;
   if (!reduceMotionOnMobileEnabled()) return false;
   return window.matchMedia(MOBILE_VIEWPORT_QUERY).matches;
 }

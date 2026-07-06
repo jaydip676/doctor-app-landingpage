@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { WideSection } from "@/components/layout/SectionShell";
-import { getLightMotionSnapshot } from "@/lib/motion-preference";
+import { prefersReducedMotion } from "@/lib/motion-preference";
 
 const chapters = [
   "Book",
@@ -77,6 +77,11 @@ export function ProductDemoSection() {
   const cursorRef = useRef<SVGSVGElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const bookBtnRef = useRef<HTMLButtonElement>(null);
+  const playingRef = useRef(playing);
+
+  useEffect(() => {
+    playingRef.current = playing;
+  }, [playing]);
 
   const setStepState = useCallback((i: number) => {
     setStep(i);
@@ -84,8 +89,7 @@ export function ProductDemoSection() {
   }, []);
 
   useEffect(() => {
-    const reduce = getLightMotionSnapshot();
-    if (reduce) {
+    if (prefersReducedMotion()) {
       setShowBookRow(true);
       return;
     }
@@ -177,7 +181,7 @@ export function ProductDemoSection() {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (!playing) return;
+          if (!playingRef.current) return;
           if (e.isIntersecting) tl.play();
           else tl.pause();
         });
@@ -185,12 +189,13 @@ export function ProductDemoSection() {
       { threshold: 0.15 },
     );
     if (stage) io.observe(stage);
+    else tl.play();
 
     return () => {
       io.disconnect();
       tl.kill();
     };
-  }, [playing, setStepState]);
+  }, [setStepState]);
 
   const onChapterClick = (i: number) => {
     const tl = timelineRef.current;

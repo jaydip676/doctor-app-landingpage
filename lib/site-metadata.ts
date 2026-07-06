@@ -20,9 +20,9 @@ export const siteSeo = {
     "Appointments, patients, prescriptions, billing and follow-ups — from one beautifully simple platform. The operating system for modern clinics in India.",
   ogImagePath: "/og.png",
   ogImageAlt:
-    "Lampros clinic management — patient summary and dashboard on phone and tablet",
-  ogImageWidth: 1024,
-  ogImageHeight: 682,
+    "Lampros — Healthcare Management for modern clinics: patient summary and clinic dashboard",
+  ogImageWidth: 1536,
+  ogImageHeight: 1024,
   keywords: [
     "clinic management software",
     "healthcare management",
@@ -80,7 +80,7 @@ export function buildRootMetadata(): Metadata {
           width: ogImageWidth,
           height: ogImageHeight,
           alt: ogImageAlt,
-          type: "image/jpeg",
+          type: "image/png",
         },
       ],
     },
@@ -88,7 +88,10 @@ export function buildRootMetadata(): Metadata {
       card: "summary_large_image",
       title,
       description,
-      images: [ogImagePath],
+      images: {
+        url: ogImagePath,
+        alt: ogImageAlt,
+      },
     },
     robots: {
       index: true,
