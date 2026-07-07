@@ -218,14 +218,14 @@ export function ProductDemoSection() {
   return (
     <WideSection id="seeit" alt>
       <div ref={rootRef}>
-        <div className="text-center max-w-[48ch] mx-auto mb-3.5 motion-reveal">
-          <div className="text-[13px] tracking-[0.04em] text-ink-soft mb-3.5">
+        <div className="text-center max-w-[clamp(48ch,28vw,113ch)] mx-auto mb-3.5 motion-reveal">
+          <div className="text-[clamp(13px,0.86vw,17px)] tracking-[0.04em] text-ink-soft mb-3.5">
             — See it in action
           </div>
-          <h2 className="font-display font-semibold text-[clamp(2rem,4.4vw,3.75rem)] tracking-[-0.03em] leading-[1.02]">
+          <h2 className="font-display font-semibold text-[clamp(2rem,4.4vw,8.75rem)] tracking-[-0.03em] leading-[1.02]">
             One patient, start to finish.
           </h2>
-          <p className="text-ink-soft text-base mt-3 leading-normal">
+          <p className="text-[clamp(1rem,1.06vw,1.6rem)] text-ink-soft mt-3 leading-normal">
             Not static screenshots — watch a real visit flow through Lampros, end
             to end.
           </p>
@@ -237,14 +237,14 @@ export function ProductDemoSection() {
               key={label}
               type="button"
               onClick={() => onChapterClick(i)}
-              className={`flex items-center gap-2 text-[13px] font-semibold px-4 py-2 rounded-full border transition cursor-pointer ${
+              className={`flex items-center gap-2 text-[clamp(13px,0.86vw,17px)] font-semibold px-4 py-2 rounded-full border transition cursor-pointer ${
                 step === i
                   ? "text-ink border-line bg-surface"
                   : "text-ink-faint border-transparent"
               }`}
             >
               <span
-                className={`w-5 h-5 rounded-full border flex items-center justify-center text-[11px] ${
+                className={`w-5 h-5 rounded-full border flex items-center justify-center text-[clamp(11px,0.73vw,14.5px)] ${
                   step === i
                     ? "bg-teal border-teal text-white"
                     : "border-line"
@@ -506,7 +506,7 @@ export function ProductDemoSection() {
           <button
             type="button"
             onClick={togglePlay}
-            className="inline-flex items-center gap-2 text-[13px] font-semibold text-ink-soft px-4 py-2 rounded-full border border-line bg-surface"
+            className="inline-flex items-center gap-2 text-[clamp(13px,0.86vw,17px)] font-semibold text-ink-soft px-4 py-2 rounded-full border border-line bg-surface"
           >
             <span>{playing ? "❚❚" : "►"}</span>
             <span>{playing ? "Pause" : "Play"}</span>

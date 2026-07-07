@@ -77,9 +77,9 @@ export function PainGrid({ items }: { items: PainGridItem[] }) {
       {items.map((item) => (
         <div
           key={item.label}
-          className="flex items-center gap-2.5 text-[13.5px] text-ink bg-surface border border-line rounded-[12px] py-3 px-3.5 min-w-0"
+          className="flex items-center gap-2.5 text-[clamp(13.5px,0.89vw,17.5px)] text-ink bg-surface border border-line rounded-[12px] py-3 px-3.5 min-w-0"
         >
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[9px] bg-teal-tint text-teal-ink">
+          <span className="flex h-[clamp(32px,2.12vw,42px)] w-[clamp(32px,2.12vw,42px)] shrink-0 items-center justify-center rounded-[9px] bg-teal-tint text-teal-ink">
             <PainIcon name={item.icon} />
           </span>
           <span className="leading-snug">{item.label}</span>

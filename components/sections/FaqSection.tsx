@@ -34,11 +34,11 @@ export function FaqSection() {
         title="Questions, answered."
         description="The things doctors ask first."
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-x-10 md:gap-y-4 max-w-[1000px] mx-auto motion-reveal">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-x-10 md:gap-y-4 max-w-[clamp(1000px,66vw,1600px)] mx-auto motion-reveal">
         {faqs.map((item) => (
           <div key={item.q}>
-            <b className="block font-semibold mb-1.5">{item.q}</b>
-            <p className="text-ink-soft text-sm leading-relaxed">{item.a}</p>
+            <b className="block text-[clamp(16px,1.06vw,21px)] font-semibold mb-1.5">{item.q}</b>
+            <p className="text-ink-soft text-[clamp(14px,0.93vw,18px)] leading-relaxed">{item.a}</p>
           </div>
         ))}
       </div>

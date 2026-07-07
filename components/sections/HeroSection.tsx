@@ -38,7 +38,7 @@ export function HeroSection() {
         </Button>
         <VideoTourTrigger />
       </div>
-      <div className="flex flex-wrap gap-x-[22px] gap-y-2 mt-[30px] text-[12.5px] text-ink-soft motion-in">
+      <div className="flex flex-wrap gap-x-[22px] gap-y-2 mt-[30px] text-[clamp(12.5px,0.83vw,16.5px)] text-ink-soft motion-in">
         <span className="text-teal shrink-0">★★★★★</span>
         <span>
           <b className="text-ink font-semibold">Trusted by 500+ doctors</b>

@@ -10,7 +10,7 @@ export function TrustedByStrip() {
       className="relative z-[3] border-y border-line bg-surface"
     >
       <div className={`${wideContainerClass} py-10 sm:py-12`}>
-        <p className="text-center text-[12px] uppercase tracking-[0.14em] text-ink-faint font-semibold mb-5 motion-reveal">
+        <p className="text-center text-[clamp(12px,0.79vw,15.5px)] uppercase tracking-[0.14em] text-ink-faint font-semibold mb-5 motion-reveal">
           Trusted by clinics across Gujarat &amp; Maharashtra
         </p>
         <div className="overflow-hidden motion-reveal [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
@@ -18,7 +18,7 @@ export function TrustedByStrip() {
             {items.map((name, i) => (
               <span
                 key={`${name}-${i}`}
-                className={`text-[15px] sm:text-base font-semibold text-ink-soft/70 whitespace-nowrap ${
+                className={`text-[15px] sm:text-[clamp(16px,1.06vw,21px)] font-semibold text-ink-soft/70 whitespace-nowrap ${
                   i >= trustedPartners.length ? "lampros-marquee-duplicate" : ""
                 }`}
                 aria-hidden={i >= trustedPartners.length ? true : undefined}

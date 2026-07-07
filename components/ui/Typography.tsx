@@ -10,7 +10,7 @@ export function Brand({ className = "" }: { className?: string }) {
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <div className="flex items-center gap-3.5 text-[13px] tracking-[0.04em] text-ink-soft mb-5 before:content-[''] before:w-10 before:h-px before:bg-ink-faint">
+    <div className="flex items-center gap-3.5 text-[clamp(13px,0.86vw,17px)] tracking-[0.04em] text-ink-soft mb-5 before:content-[''] before:w-10 before:h-px before:bg-ink-faint">
       {children}
     </div>
   );
@@ -28,8 +28,8 @@ export function SectionTitle({
   const Tag = as;
   const size =
     as === "h1"
-      ? "text-[clamp(2.875rem,6.6vw,6.125rem)] leading-[1.02] tracking-[-0.04em]"
-      : "text-[clamp(2rem,4.4vw,3.75rem)] leading-[1.02] tracking-[-0.03em]";
+      ? "text-[clamp(2.875rem,6.6vw,13rem)] leading-[1.02] tracking-[-0.04em]"
+      : "text-[clamp(2rem,4.4vw,8.75rem)] leading-[1.02] tracking-[-0.03em]";
   return (
     <Tag className={`font-display font-semibold ${size} ${className}`}>
       {children}
@@ -39,7 +39,7 @@ export function SectionTitle({
 
 export function Lede({ children }: { children: ReactNode }) {
   return (
-    <p className="text-[clamp(1rem,1.5vw,1.1875rem)] text-ink-soft leading-[1.55] mt-[22px]">
+    <p className="text-[clamp(1rem,1.5vw,2.25rem)] text-ink-soft leading-[1.55] mt-[clamp(22px,1.45vw,35px)]">
       {children}
     </p>
   );

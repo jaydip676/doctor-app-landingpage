@@ -53,27 +53,27 @@ export function PricingSection() {
         title="Simple, honest pricing."
         description="Start free. Upgrade when your clinic is ready."
       />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-[18px] max-w-[1000px] mx-auto motion-reveal">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-[18px] max-w-[clamp(1000px,66vw,1600px)] mx-auto motion-reveal">
         {plans.map((plan) => (
           <div
             key={plan.name}
-            className={`relative border rounded-[18px] bg-surface p-[30px] ${
+            className={`relative border rounded-[18px] bg-surface p-[clamp(30px,1.98vw,42px)] ${
               plan.popular
                 ? "border-teal shadow-[var(--shadow-popular)]"
                 : "border-line"
             }`}
           >
             {plan.popular ? (
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-teal text-white text-[11px] font-bold tracking-widest px-3 py-1 rounded-full">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-teal text-white text-[clamp(11px,0.73vw,14.5px)] font-bold tracking-widest px-3 py-1 rounded-full">
                 MOST POPULAR
               </div>
             ) : null}
-            <h3 className="font-display text-[19px] font-semibold">{plan.name}</h3>
-            <div className="text-[13px] text-ink-soft mt-1 mb-4">{plan.for}</div>
-            <div className="font-display text-[40px] font-semibold tracking-tight">
+            <h3 className="font-display text-[clamp(19px,1.26vw,25px)] font-semibold">{plan.name}</h3>
+            <div className="text-[clamp(13px,0.86vw,17px)] text-ink-soft mt-1 mb-4">{plan.for}</div>
+            <div className="font-display text-[clamp(40px,2.65vw,58px)] font-semibold tracking-tight">
               {plan.price}
               {plan.period ? (
-                <small className="text-sm text-ink-soft font-medium">
+                <small className="text-[clamp(14px,0.93vw,18px)] text-ink-soft font-medium">
                   {plan.period}
                 </small>
               ) : null}
@@ -82,7 +82,7 @@ export function PricingSection() {
               {plan.features.map((f) => (
                 <li
                   key={f}
-                  className="text-[13.5px] text-ink-soft pl-5 relative before:content-['✓'] before:absolute before:left-0 before:text-teal before:font-bold"
+                  className="text-[clamp(13.5px,0.89vw,17.5px)] text-ink-soft pl-5 relative before:content-['✓'] before:absolute before:left-0 before:text-teal before:font-bold"
                 >
                   {f}
                 </li>
@@ -90,7 +90,7 @@ export function PricingSection() {
             </ul>
             <Link
               href="mailto:hello@lampros.tech"
-              className={`block text-center font-semibold text-sm py-[13px] rounded-full border ${
+              className={`block text-center font-semibold text-[clamp(14px,0.93vw,18px)] py-[13px] rounded-full border ${
                 plan.popular
                   ? "bg-[var(--btn-primary-bg)] !text-[var(--btn-primary-fg)] border-[var(--btn-primary-bg)]"
                   : "border-line"
@@ -101,7 +101,7 @@ export function PricingSection() {
           </div>
         ))}
       </div>
-      <div className="flex flex-wrap gap-6 justify-center mt-[34px] text-[13px] text-ink-soft motion-reveal">
+      <div className="flex flex-wrap gap-6 justify-center mt-[34px] text-[clamp(13px,0.86vw,17px)] text-ink-soft motion-reveal">
         <span>
           <b className="text-ink">14-day</b> free trial
         </span>

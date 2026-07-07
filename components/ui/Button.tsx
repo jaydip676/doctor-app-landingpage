@@ -5,13 +5,13 @@ import { isExternalUrl } from "@/lib/book-demo-url";
 type ButtonVariant = "primary" | "ghost";
 
 const base =
-  "inline-flex items-center gap-[9px] font-semibold text-[15px] rounded-full transition";
+  "inline-flex items-center gap-[9px] font-semibold text-[clamp(15px,0.99vw,20px)] rounded-full transition";
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    "btn-primary bg-[var(--btn-primary-bg)] !text-[var(--btn-primary-fg)] px-[26px] py-[15px] shadow-[var(--btn-primary-shadow)] hover:-translate-y-0.5 transition-transform duration-[250ms]",
+    "btn-primary bg-[var(--btn-primary-bg)] !text-[var(--btn-primary-fg)] px-[clamp(26px,1.72vw,34px)] py-[clamp(15px,0.99vw,20px)] shadow-[var(--btn-primary-shadow)] hover:-translate-y-0.5 transition-transform duration-[250ms]",
   ghost:
-    "text-ink border border-line bg-[var(--btn-ghost-fill)] px-6 py-[15px] hover:border-ink-faint duration-[250ms]",
+    "text-ink border border-line bg-[var(--btn-ghost-fill)] px-[clamp(24px,1.59vw,32px)] py-[clamp(15px,0.99vw,20px)] hover:border-ink-faint duration-[250ms]",
 };
 
 export function Button({

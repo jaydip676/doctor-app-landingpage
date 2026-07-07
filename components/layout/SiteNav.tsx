@@ -85,12 +85,12 @@ export function SiteNav() {
         }`}
       >
         <nav
-          className={`${splitContainerClass} flex items-center justify-between py-4 sm:py-5 gap-3`}
+          className={`${splitContainerClass} flex items-center justify-between py-[clamp(16px,1.06vw,26px)] gap-3`}
         >
-          <Link href="/" className="text-[20px] leading-none shrink-0">
+          <Link href="/" className="text-[clamp(20px,1.32vw,26px)] leading-none shrink-0">
             <Brand />
           </Link>
-          <div className="hidden min-[901px]:flex items-center gap-7 text-sm text-ink-soft">
+          <div className="hidden min-[901px]:flex items-center gap-7 text-[clamp(14px,0.93vw,18px)] text-ink-soft">
             {links.map((l) => (
               <Link key={l.href} href={l.href} className="hover:text-ink">
                 {l.label}
@@ -100,7 +100,7 @@ export function SiteNav() {
           <div className="flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
             <Link
               href={bookDemoUrl}
-              className="inline-flex items-center text-[13px] sm:text-sm font-semibold px-3.5 sm:px-[18px] py-2 sm:py-2.5 rounded-full bg-[var(--btn-primary-bg)] !text-[var(--btn-primary-fg)] shadow-[var(--btn-primary-shadow)] whitespace-nowrap cursor-pointer hover:-translate-y-0.5 transition-transform duration-[250ms]"
+              className="inline-flex items-center text-[13px] sm:text-[clamp(14px,0.93vw,18px)] font-semibold px-3.5 sm:px-[clamp(18px,1.19vw,24px)] py-2 sm:py-[clamp(10px,0.66vw,13px)] rounded-full bg-[var(--btn-primary-bg)] !text-[var(--btn-primary-fg)] shadow-[var(--btn-primary-shadow)] whitespace-nowrap cursor-pointer hover:-translate-y-0.5 transition-transform duration-[250ms]"
               {...(isExternalUrl(bookDemoUrl)
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}

@@ -39,8 +39,8 @@ export function SplitSection({
       : "min-[901px]:col-start-1 min-[901px]:row-start-1";
 
   const copyWidth = wideContent
-    ? "max-w-none min-[901px]:max-w-[min(100%,82ch)]"
-    : "max-w-[60ch] max-[900px]:max-w-none";
+    ? "max-w-none min-[901px]:max-w-[min(100%,clamp(82ch,49vw,175ch))]"
+    : "max-w-[clamp(60ch,35vw,124ch)] max-[900px]:max-w-none";
 
   return (
     <section
@@ -51,7 +51,7 @@ export function SplitSection({
         } ${anchor ? "anchor" : ""}`}
     >
       <div
-        className={`${splitContainerClass} py-[clamp(72px,12vh,96px)] grid grid-cols-1 min-[901px]:grid-cols-2 gap-[30px] items-center ${wideContent ? "min-[901px]:gap-0" : ""}`}
+        className={`${splitContainerClass} py-[clamp(72px,12vh,150px)] grid grid-cols-1 min-[901px]:grid-cols-2 gap-[clamp(30px,1.98vw,63px)] items-center ${wideContent ? "min-[901px]:gap-0" : ""}`}
       >
         <div
           className={`relative z-[4] w-full min-w-0 py-5 sm:py-[26px] rounded-[18px] ${copyWidth} ${copyGrid} ${copyPanel}`}
@@ -67,7 +67,7 @@ export function SplitSection({
       </div>
       {scrollCue ? (
         <div
-          className={`absolute bottom-[26px] ${splitAlignLeftClass} z-[4] flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-ink-faint`}
+          className={`absolute bottom-[26px] ${splitAlignLeftClass} z-[4] flex items-center gap-3 text-[clamp(11px,0.73vw,14.5px)] uppercase tracking-[0.22em] text-ink-faint`}
         >
           Scroll
           <span className="lampros-cue-bar relative w-[34px] h-px bg-ink-faint overflow-hidden" />
@@ -91,7 +91,7 @@ export function WideSection({
       id={id}
       className={`relative z-[3] ${alt ? "bg-surface border-y border-line" : ""}`}
     >
-      <div className={`${wideContainerClass} py-[clamp(70px,10vh,120px)]`}>
+      <div className={`${wideContainerClass} py-[clamp(70px,10vh,180px)]`}>
         {children}
       </div>
     </section>
@@ -111,18 +111,18 @@ export function WideHeader({
 }) {
   return (
     <div
-      className={`text-center max-w-[46ch] mx-auto mb-11 motion-reveal ${className}`}
+      className={`text-center max-w-[clamp(46ch,27vw,108ch)] mx-auto mb-11 motion-reveal ${className}`}
     >
       {eyebrow ? (
-        <div className="text-[13px] tracking-[0.04em] text-ink-soft mb-3.5">
+        <div className="text-[clamp(13px,0.86vw,17px)] tracking-[0.04em] text-ink-soft mb-3.5">
           {eyebrow}
         </div>
       ) : null}
-      <h2 className="font-display font-semibold text-[clamp(2rem,4.4vw,3.75rem)] tracking-[-0.03em] leading-[1.02] mb-3.5">
+      <h2 className="font-display font-semibold text-[clamp(2rem,4.4vw,8.75rem)] tracking-[-0.03em] leading-[1.02] mb-3.5">
         {title}
       </h2>
       {description ? (
-        <p className="text-ink-soft text-base leading-normal">{description}</p>
+        <p className="text-[clamp(1rem,1.06vw,1.6rem)] text-ink-soft leading-normal">{description}</p>
       ) : null}
     </div>
   );

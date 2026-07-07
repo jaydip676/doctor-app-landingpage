@@ -38,7 +38,7 @@ export function VideoTourModal({
       onClick={onClose}
     >
       <div
-        className="flex max-h-[min(90dvh,calc(100dvh-2rem))] w-[min(92vw,900px)] min-w-[min(100%,20rem)] flex-col overflow-hidden rounded-[20px] border border-line bg-surface shadow-[var(--shadow-card)]"
+        className="flex max-h-[min(90dvh,calc(100dvh-2rem))] w-[min(92vw,clamp(900px,59vw,1440px))] min-w-[min(100%,20rem)] flex-col overflow-hidden rounded-[20px] border border-line bg-surface shadow-[var(--shadow-card)]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex shrink-0 items-center justify-between border-b border-line px-5 py-4">
@@ -96,7 +96,7 @@ export function VideoTourTrigger({ className = "" }: { className?: string }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={`inline-flex w-fit max-w-full shrink-0 cursor-pointer items-center gap-2.5 font-semibold text-[15px] text-ink border border-line bg-[var(--btn-ghost-fill)] px-5 py-[15px] rounded-full hover:border-ink-faint transition-colors ${className}`}
+        className={`inline-flex w-fit max-w-full shrink-0 cursor-pointer items-center gap-2.5 font-semibold text-[clamp(15px,0.99vw,20px)] text-ink border border-line bg-[var(--btn-ghost-fill)] px-[clamp(20px,1.32vw,26px)] py-[clamp(15px,0.99vw,20px)] rounded-full hover:border-ink-faint transition-colors ${className}`}
       >
         <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal text-white">
           <svg

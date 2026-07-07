@@ -81,7 +81,7 @@ export function SpecialtyShowcaseSection() {
             aria-selected={i === active}
             aria-controls="spec-panel"
             onClick={() => setActive(i)}
-            className={`text-[13px] font-semibold px-4 py-2 rounded-full border transition-colors duration-300 ${
+            className={`text-[clamp(13px,0.86vw,17px)] font-semibold px-4 py-2 rounded-full border transition-colors duration-300 ${
               i === active
                 ? "bg-teal text-white border-teal"
                 : "bg-surface text-ink-soft border-line hover:border-ink-faint"

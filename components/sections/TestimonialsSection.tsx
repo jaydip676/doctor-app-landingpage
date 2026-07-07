@@ -18,7 +18,7 @@ function TestimonialSlide({ t }: { t: Testimonial }) {
   return (
     <>
       <blockquote className="text-center">
-        <p className="font-display font-medium text-[clamp(1.35rem,3vw,2.35rem)] leading-[1.2] tracking-[-0.02em] text-ink min-h-[4.5em] sm:min-h-[3.5em]">
+        <p className="font-display font-medium text-[clamp(1.35rem,3vw,6rem)] leading-[1.2] tracking-[-0.02em] text-ink min-h-[4.5em] sm:min-h-[3.5em]">
           &ldquo;{t.quote}&rdquo;
         </p>
       </blockquote>
@@ -34,9 +34,9 @@ function TestimonialSlide({ t }: { t: Testimonial }) {
           />
         </div>
         <div className="text-center sm:text-left">
-          <div className="font-semibold text-ink">{t.name}</div>
-          <div className="text-sm text-ink-soft">{t.role}</div>
-          <div className="text-sm text-teal-ink font-medium mt-0.5">
+          <div className="font-semibold text-[clamp(16px,1.06vw,21px)] text-ink">{t.name}</div>
+          <div className="text-[clamp(14px,0.93vw,18px)] text-ink-soft">{t.role}</div>
+          <div className="text-[clamp(14px,0.93vw,18px)] text-teal-ink font-medium mt-0.5">
             {t.institution}
           </div>
         </div>
@@ -111,7 +111,7 @@ export function TestimonialsSection() {
         title="Doctors on the record."
         description="Pilot clinics sharing what changed after going live on Lampros."
       />
-      <div className="max-w-[820px] mx-auto motion-reveal">
+      <div className="max-w-[clamp(820px,54vw,1400px)] mx-auto motion-reveal">
         <div className="relative min-h-[280px] sm:min-h-[260px] overflow-hidden">
           {exiting && !reducedMotion ? (
             <div
