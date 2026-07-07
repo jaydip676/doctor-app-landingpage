@@ -96,8 +96,6 @@ export const stories = [
   },
 ];
 
-/** Replace with your product tour embed URL when available */
-export const productTourVideoUrl = "";
 
 export const whatsappUrl = "https://wa.me/919033779620?text=Hi%20Lampros%2C%20I%27d%20like%20a%20clinic%20tour";
 
